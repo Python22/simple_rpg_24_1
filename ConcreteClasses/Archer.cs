@@ -12,7 +12,10 @@ namespace simple_rpg_24_1.ConcreteClasses
     {
         public int SimpleRangeDamage { get; set; }
         public int AimedRangeDamage { get; set; }
-        
+        public int BaseDamageStaminaCost { get; set; }          // ****
+        public int SimpleRangeStaminaCost { get; set; }         // *****
+        public int AimedRangeStaminaCost { get; set; }          // *****
+
         public Archer(int id, string type, string name, int current_hp,
                        int max_hp, int current_stamina, int max_stamina,
                        int current_mana, int max_mana, int position_x,
@@ -20,27 +23,44 @@ namespace simple_rpg_24_1.ConcreteClasses
         {
             SimpleRangeDamage = 20;
             AimedRangeDamage = 40;
+            BaseDamageStaminaCost = 30;                         // *****
+            SimpleRangeStaminaCost = 40;                        // *****
+            AimedRangeStaminaCost = 90;                         // *****
         }
 
         public override void BasicAttack(Unit target)
         {
+            if (CurrentStamina < BaseDamageStaminaCost)
+            {
+                Console.WriteLine($"Для удара не хватило выносливости...{Name} упал...");
+                return;
+            }
             Console.WriteLine($"{Type} {Name} наносит простой урон в ближнем бою по {target.Name}");
             target.TakeDamage(BaseDamage);
-            CurrentStamina -= 30;
+            CurrentStamina -= BaseDamageStaminaCost;
         }
 
         public void RangeSimpleAttack(Unit target)
         {
+            if (CurrentStamina < SimpleRangeStaminaCost)
+            {
+                Console.WriteLine($"Для удара не хватило выносливости...{Name} упал...");
+                return;
+            }
             Console.WriteLine($"{Type} {Name} наносит простой урон в дальнем бою по {target.Name}");
             target.TakeDamage(SimpleRangeDamage);
-            CurrentStamina -= 40;
+            CurrentStamina -= SimpleRangeStaminaCost;
         }
         public void RangeAimedAttack(Unit target)
         {
+            if (CurrentStamina < AimedRangeStaminaCost)
+            {
+                Console.WriteLine($"Для удара не хватило выносливости...{Name} упал...");
+                return;
+            }
             Console.WriteLine($"{Type} {Name} наносит прицельный урон в дальнем бою по {target.Name}");
             target.TakeDamage(AimedRangeDamage);
-            CurrentStamina -= 90;
-
+            CurrentStamina -= AimedRangeStaminaCost;
         }
 
     }

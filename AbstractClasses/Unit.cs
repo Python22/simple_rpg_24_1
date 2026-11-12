@@ -98,6 +98,9 @@ namespace simple_rpg_24_1.AbstractClasses
         }
 
         public abstract void BasicAttack(Unit target);
+        public void ShowInfo() {
+            Console.WriteLine($"{Type} {Name}. HP: {CurrentHp}/{MaxHp}. Stamina: {CurrentStamina}/{MaxStamina}. Mana: {CurrentMana}/{MaxMana}.");
+        }
 
     }
 }
