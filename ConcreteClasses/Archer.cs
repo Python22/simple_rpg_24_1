@@ -40,6 +40,7 @@ namespace simple_rpg_24_1.ConcreteClasses
             Console.WriteLine($"{Type} {Name} наносит прицельный урон в дальнем бою по {target.Name}");
             target.TakeDamage(AimedRangeDamage);
             CurrentStamina -= 90;
+
         }
 
     }
