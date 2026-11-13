@@ -77,5 +77,27 @@ namespace simple_rpg_24_1.ConcreteClasses
             target.RestoreHp(HealValue);        // **
             CurrentMana -= HealManaCost;        // **
         }
+
+        public override void ShowAttacksAndCosts()
+        {
+            Console.WriteLine("Возможные атаки:");
+            Console.WriteLine($"\t1) Базовая атака.\n\t\tУрон: {BaseDamage}\n\t\tСтоимость выносливости: {BaseDamageStaminaCost}");
+            Console.WriteLine($"\t2) Кинуть Файерболл.\n\t\tУрон: {FireballAttackDamage}\n\t\tСтоимость маны: {FireballAttackManaCost}");
+            Console.WriteLine($"\t3) Электрическая атака.\n\t\tУрон: {ElectricAttackDamage}\n\t\tСтоимость маны: {ElectricAttackManaCost}");
+            Console.WriteLine($"\t4) Вылечить союзника.\n\t\tХилка: {HealValue}\n\t\tСтоимость маны: {HealManaCost}");
+        }
+
+        public override void UserChoiceAttack(string user_choice, Unit target)
+        {
+            switch (user_choice)
+            {
+                case "1": BasicAttack(target); break;
+                case "2": FireballAttack(target); break;
+                case "3": ElectricAttack(target); break;
+                case "4": HealTarget(target); break;
+                case "0": Console.WriteLine($"{Type} {Name} пропускает этот ход."); break;
+                default: Console.WriteLine("Неизвестная команда...Нет такой атаки..."); break;
+            }
+        }
     }
 }

@@ -13,8 +13,8 @@ namespace simple_rpg_24_1
                 units_id,
                 "лучник",
                 "Вася",
-                200,
-                200,
+                300,
+                300,
                 200,
                 200,
                 0,
@@ -31,8 +31,8 @@ namespace simple_rpg_24_1
                 units_id,
                 "лучник",
                 "Петя",
-                150,
-                150,
+                250,
+                250,
                 150,
                 150,
                 0,
@@ -49,12 +49,12 @@ namespace simple_rpg_24_1
                 units_id,
                 "маг",
                 "Гендальф",
+                250,
+                250,
                 150,
                 150,
-                150,
-                150,
-                0,
-                0,
+                200,
+                200,
                 0,
                 0,
                 true,
@@ -94,11 +94,27 @@ namespace simple_rpg_24_1
                 }
                 Console.Write("\nБосс: ");
                 boss.ShowInfo();
-                Console.ReadLine();
                 foreach (var unit in party)
                 {
-                    Console.WriteLine($"Сейчас очередь {unit.Name}...");
+                    Console.WriteLine($"Сейчас ходит {unit.Name}...");
+                    unit.ShowAttacksAndCosts();
+                    Console.WriteLine("Введите номер атаки(0 для пропуска хода)");
+                    string user_choice = Console.ReadLine();
+                    unit.UserChoiceAttack(user_choice, boss);
+                }
 
+                // ход босса
+                var random = new Random();
+                int target_index = random.Next(0, party.Length);    // 0 1 2
+                int random_attack_number = random.Next(2, 4);       // 1 2 3
+                if (party[target_index].IsAlive)
+                {
+                    switch (random_attack_number) 
+                    {
+                        case 1: boss.BasicAttack(party[target_index]); break;
+                        case 2: boss.FireballAttack(party[target_index]); break;
+                        case 3: boss.ElectricAttack(party[target_index]); break;
+                    }
                 }
             }
 

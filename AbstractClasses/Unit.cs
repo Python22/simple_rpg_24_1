@@ -99,8 +99,32 @@ namespace simple_rpg_24_1.AbstractClasses
 
         public abstract void BasicAttack(Unit target);
         public void ShowInfo() {
-            Console.WriteLine($"{Type} {Name}. HP: {CurrentHp}/{MaxHp}. Stamina: {CurrentStamina}/{MaxStamina}. Mana: {CurrentMana}/{MaxMana}.");
+            if (IsAlive)
+            {
+                Console.Write($"{Type} {Name}. ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"HP: {CurrentHp}/{MaxHp}. ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"Stamina: {CurrentStamina}/{MaxStamina}. ");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine($"Mana: {CurrentMana}/{MaxMana}.");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write($"МЁРТВ...{Type} {Name}. ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"HP: {CurrentHp}/{MaxHp}. ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"Stamina: {CurrentStamina}/{MaxStamina}. ");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine($"Mana: {CurrentMana}/{MaxMana}.");
+                Console.ResetColor();
+            }
         }
+
+        public abstract void ShowAttacksAndCosts();
+        public abstract void UserChoiceAttack(string user_choice, Unit target);
 
     }
 }

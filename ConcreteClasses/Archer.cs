@@ -63,5 +63,24 @@ namespace simple_rpg_24_1.ConcreteClasses
             CurrentStamina -= AimedRangeStaminaCost;
         }
 
+        public override void ShowAttacksAndCosts()
+        {
+            Console.WriteLine("Возможные атаки:");
+            Console.WriteLine($"\t1) Базовая атака.\n\t\tУрон: {BaseDamage}\n\t\tСтоимость выносливости: {BaseDamageStaminaCost}");
+            Console.WriteLine($"\t2) Простая дальняя атака.\n\t\tУрон: {SimpleRangeDamage}\n\t\tСтоимость выносливости: {SimpleRangeStaminaCost}");
+            Console.WriteLine($"\t3) Прицельная дальняя атака.\n\t\tУрон: {AimedRangeDamage}\n\t\tСтоимость выносливости: {AimedRangeStaminaCost}");
+        }
+
+        public override void UserChoiceAttack(string user_choice, Unit target) 
+        {
+            switch (user_choice)
+            {
+                case "1": BasicAttack(target); break;
+                case "2": RangeSimpleAttack(target); break;
+                case "3": RangeAimedAttack(target); break;
+                case "0": Console.WriteLine($"{Type} {Name} пропускает этот ход."); break;
+                default: Console.WriteLine("Неизвестная команда...Нет такой атаки..."); break;
+            }
+        }
     }
 }
